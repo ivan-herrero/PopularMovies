@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">PopMov</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_movie_detail">Movie Details</string>
+
+    <!-- Strings related to SettingsActivity -->
+
+    <!-- General settings -->
+    <string name="pref_header_general">General</string>
+    <string name="pref_general_sortorder_title">Sort order</string>
+    <string name="pref_general_sortorder_key">sortorder_list</string>
+    <string name="pref_general_sortorder_default">popular</string>
+
+    <string-array name="pref_general_sortorder_entries">
+        <item>Most Popular</item>
+        <item>Top Rated</item>
+    </string-array>
+    <string-array name="pref_general_sortorder_values">
+        <item>popular</item>
+        <item>top_rated</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

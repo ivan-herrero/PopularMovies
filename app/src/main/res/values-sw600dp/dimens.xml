@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="movie_gridview_colum_width">300dp</dimen>
+</resources>
