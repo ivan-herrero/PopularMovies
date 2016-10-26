@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,14 +92,14 @@ public class MovieFragment extends Fragment {
 
         TheMovieDbService theMovieDbService = retrofit.create(TheMovieDbService.class);
 
-        Call<TheMovieDbResponse> call = theMovieDbService.getMovies(
+        Call<TheMovieDbResponseMovie> call = theMovieDbService.getMovies(
                 sortOrder,
                 BuildConfig.THE_MOVIE_DB_API_KEY,
                 language);
 
-        call.enqueue(new Callback<TheMovieDbResponse>() {
+        call.enqueue(new Callback<TheMovieDbResponseMovie>() {
                          @Override
-                         public void onResponse(Call<TheMovieDbResponse> call, Response<TheMovieDbResponse> response) {
+                         public void onResponse(Call<TheMovieDbResponseMovie> call, Response<TheMovieDbResponseMovie> response) {
                              if (response != null) {
                                  List<Movie> moviesList = response.body().getResults();
                                  mMovieAdapter.clear();
@@ -109,8 +110,10 @@ public class MovieFragment extends Fragment {
                          }
 
                          @Override
-                         public void onFailure(Call<TheMovieDbResponse> call, Throwable t) {
-                             // TODO: handle gracefully
+                         public void onFailure(Call<TheMovieDbResponseMovie> call, Throwable t) {
+                             final String message = "Couldn't load movies, " +
+                                     "check your internet connection";
+                             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                          }
                      }
         );

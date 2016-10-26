@@ -11,17 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MovieDetailFragment extends Fragment {
 
     final String RATING_STRING = "Average rating: ";
+    View rootView;
 
     public MovieDetailFragment() {
         // Required empty public constructor
@@ -35,7 +44,7 @@ public class MovieDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
 
         // Gets the movie data
         Intent intent = getActivity().getIntent();
@@ -57,22 +66,9 @@ public class MovieDetailFragment extends Fragment {
                         .build();
                 Picasso.with(getContext()).load(trailerImgUri.toString()).into(trailerImgView);
             }
-
-            // TODO: Trailer video
-            // Sets listener to launch implicit intent to watch the trailer when
-            // the play button is clicked
-/*            ImageView playButtonView = ((ImageView) rootView.findViewById(R.id.movie_detail_play_button));
-            playButtonView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String trailerUri = selectedMovie.getTrailerUri();
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(trailer);
-                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        startActivity(intent);
-                    }
-                }
-            });*/
+            // Asynchronously handles fetching the trailer and setting a click
+            // listener on the play button
+            setTrailer(selectedMovie);
 
             ImageView posterView = ((ImageView) rootView.findViewById(R.id.movie_detail_poster));
             // If the movie has no poster, load a placeholder img
@@ -124,5 +120,82 @@ public class MovieDetailFragment extends Fragment {
         }
 
         return outputDate;
+    }
+
+
+    private void setTrailer(Movie movie) {
+        // In the future, the user might be able to choose the language
+        final String language = "en-US";
+        final String THEMOVIEDB_BASE_URL = "https://api.themoviedb.org/3/movie/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(THEMOVIEDB_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TheMovieDbService theMovieDbService = retrofit.create(TheMovieDbService.class);
+
+        Call<TheMovieDbResponseVideo> call = theMovieDbService.getVideos(
+                movie.getId(),
+                BuildConfig.THE_MOVIE_DB_API_KEY,
+                language);
+
+        call.enqueue(new Callback<TheMovieDbResponseVideo>() {
+                         @Override
+                         public void onResponse(Call<TheMovieDbResponseVideo> call, Response<TheMovieDbResponseVideo> response) {
+                             if (response.body().getResults().size() > 0) {
+                                 setPlayButtonListener(response.body().getResults());
+                             }
+                             else {
+                                 setNotAvailableListener();
+                             }
+                         }
+
+                         @Override
+                         public void onFailure(Call<TheMovieDbResponseVideo> call, Throwable t) {
+                             final String message = "Couldn't load trailer, check your internet connection";
+                             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                         }
+                     }
+        );
+    }
+
+    /* Sets listener to launch implicit intent to watch the trailer when
+    the play button is clicked */
+    private void setPlayButtonListener(List<Video> videos) {
+        final Uri trailerUri = buildTrailerUri(videos.get(0));
+
+        ImageView playButtonView = ((ImageView) rootView.findViewById(R.id.movie_detail_play_button));
+        playButtonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(trailerUri);
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    /* Sets listener to show the user a message when the selected trailer is not
+        available */
+    private void setNotAvailableListener() {
+        ImageView playButtonView = ((ImageView) rootView.findViewById(R.id.movie_detail_play_button));
+        playButtonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String message = "Trailer not available";
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private Uri buildTrailerUri(Video video) {
+        final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch";
+        final String QUERY_PARAMETER = "v";
+        return Uri.parse(YOUTUBE_BASE_URL).buildUpon()
+                .appendQueryParameter(QUERY_PARAMETER, video.getKey())
+                .build();
     }
 }

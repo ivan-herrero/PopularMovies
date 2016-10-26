@@ -12,7 +12,7 @@ public class Movie implements Parcelable {
     // Possible poster sizes:
     //  "w92", "w154", "w185", "w342", "w500", "w780", or "original".
     final static public String POSTER_SIZE = "w185";
-    final static public String BACKDROP_SIZE = "w342";
+    final static public String BACKDROP_SIZE = "w500";
 
     // Used as key for intent.putExtra()
     final static public String EXTRA_NAME = "selected_movie";
