@@ -22,11 +22,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         // Adds up-button to the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_movie_detail, new MovieDetailFragment())
-                    .commit();
-        }
     }
 
     @Override
