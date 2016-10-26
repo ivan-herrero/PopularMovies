@@ -52,7 +52,7 @@
             android:layout_margin="@dimen/movie_detail_margin"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
                 android:id="@+id/movie_detail_poster"
                 android:layout_width="@dimen/movie_gridview_colum_width"
                 android:layout_height="wrap_content"

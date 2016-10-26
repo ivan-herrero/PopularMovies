@@ -1,7 +1,7 @@
 <resources>
     <dimen name="activity_horizontal_margin">0dp</dimen>
     <dimen name="activity_vertical_margin">0dp</dimen>
+    <dimen name="movie_detail_margin">15dp</dimen>
     <dimen name="movie_gridview_colum_width">150dp</dimen>
     <dimen name="movie_detail_maintrailer_height">200dp</dimen>
-    <dimen name="movie_detail_margin">15dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-<ImageView
+<com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="io.github.doyouevendev.popularmoviesapp.MovieFragment"
@@ -7,4 +7,4 @@
     android:layout_height="wrap_content"
     android:adjustViewBounds="true"
     android:scaleType="centerCrop">
-</ImageView>
+</com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView>
