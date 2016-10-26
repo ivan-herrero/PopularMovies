@@ -3,6 +3,8 @@ package io.github.doyouevendev.popularmoviesapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Movie implements Parcelable {
     // Constants holding info for handling images urls
     final static public String THE_MOVIE_DB_URL = "http://image.tmdb.org/t/p";
@@ -17,11 +19,14 @@ public class Movie implements Parcelable {
 
     private int id;
     private String title;
+    @SerializedName("release_date")
     private String date;
-    private int length;
+    @SerializedName("vote_average")
     private double score;
-    private String description;
+    private String overview;
+    @SerializedName("poster_path")
     private String posterUri;
+    @SerializedName("backdrop_path")
     private String backdropUri;
     private String trailerUri;
 
@@ -29,16 +34,15 @@ public class Movie implements Parcelable {
         this.title = "NULL";
     }
 
-    public Movie(int id, String title, String year, int length, double score,
-                 String description, String posterBigUri, String posterMediumUri,
-                 String backdropUri, String trailerUri) {
+    public Movie(int id, String title, String date, double score,
+                 String overview, String posterUri, String backdropUri,
+                 String trailerUri) {
         this.id = id;
         this.title = title;
-        this.date = year;
-        this.length = length;
+        this.date = date;
         this.score = score;
-        this.description = description;
-        this.posterUri = posterBigUri;
+        this.overview = overview;
+        this.posterUri = posterUri;
         this.backdropUri = backdropUri;
         this.trailerUri = trailerUri;
     }
@@ -67,14 +71,6 @@ public class Movie implements Parcelable {
         this.date = date;
     }
 
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
     public double getScore() {
         return score;
     }
@@ -83,12 +79,12 @@ public class Movie implements Parcelable {
         this.score = score;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getPosterUri() {
@@ -121,9 +117,8 @@ public class Movie implements Parcelable {
         id = in.readInt();
         title = in.readString();
         date = in.readString();
-        length = in.readInt();
         score = in.readDouble();
-        description = in.readString();
+        overview = in.readString();
         posterUri = in.readString();
         backdropUri = in.readString();
         trailerUri = in.readString();
@@ -139,9 +134,8 @@ public class Movie implements Parcelable {
         dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(date);
-        dest.writeInt(length);
         dest.writeDouble(score);
-        dest.writeString(description);
+        dest.writeString(overview);
         dest.writeString(posterUri);
         dest.writeString(backdropUri);
         dest.writeString(trailerUri);

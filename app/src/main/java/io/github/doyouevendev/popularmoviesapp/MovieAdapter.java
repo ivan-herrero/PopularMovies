@@ -41,7 +41,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
             // Build the poster img URL with the corresponding size
             Uri posterUri = Uri.parse(Movie.THE_MOVIE_DB_URL).buildUpon()
                     .appendPath(Movie.POSTER_SIZE)
-                    .appendPath(movie.getPosterUri())
+                    // .substring(1) is needed to remove the leading '/'
+                    .appendPath(movie.getPosterUri().substring(1))
                     .build();
             Picasso.with(getContext()).load(posterUri.toString()).into(view);
         }

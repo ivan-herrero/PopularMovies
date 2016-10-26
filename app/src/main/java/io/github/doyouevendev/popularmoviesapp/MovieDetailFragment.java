@@ -52,7 +52,8 @@ public class MovieDetailFragment extends Fragment {
                 // Build the backdrop img URL with the corresponding size
                 Uri trailerImgUri = Uri.parse(Movie.THE_MOVIE_DB_URL).buildUpon()
                         .appendPath(Movie.BACKDROP_SIZE)
-                        .appendPath(selectedMovie.getBackdropUri())
+                        // .substring(1) is needed to remove the leading '/'
+                        .appendPath(selectedMovie.getBackdropUri().substring(1))
                         .build();
                 Picasso.with(getContext()).load(trailerImgUri.toString()).into(trailerImgView);
             }
@@ -82,7 +83,8 @@ public class MovieDetailFragment extends Fragment {
                 // Build the poster img URL with the corresponding size
                 Uri posterUri = Uri.parse(Movie.THE_MOVIE_DB_URL).buildUpon()
                         .appendPath(Movie.POSTER_SIZE)
-                        .appendPath(selectedMovie.getPosterUri())
+                        // .substring(1) is needed to remove the leading '/'
+                        .appendPath(selectedMovie.getPosterUri().substring(1))
                         .build();
                 Picasso.with(getContext()).load(posterUri.toString()).into(posterView);
             }
@@ -101,7 +103,7 @@ public class MovieDetailFragment extends Fragment {
 
             /* Overview */
             ((TextView) rootView.findViewById(R.id.movie_detail_description))
-                    .setText(selectedMovie.getDescription());
+                    .setText(selectedMovie.getOverview());
         }
 
         return rootView;
