@@ -15,6 +15,11 @@ Android app that allows you to browse movies and their info provided by [The Mov
 *_Figure provided by Android Studio as of time of development of this app._
 
 ## Screens
+![Popular Movies Main image](demo/PopMov_main1.png)
+
+![Popular Movies Detail image](demo/PopMov_detail1.png)
+
+![Popular Movies Demo gif](demo/PopMov_demo.gif)
 
 ## Libraries
 - [Picasso](http://square.github.io/picasso/)
