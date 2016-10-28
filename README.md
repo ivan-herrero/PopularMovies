@@ -19,8 +19,6 @@ Android app that allows you to browse movies and their info provided by [The Mov
 
 ![Popular Movies Detail image](demo/PopMov_detail1.png)
 
-![Popular Movies Demo gif](demo/PopMov_demo.gif)
-
 ## Libraries
 - [Picasso](http://square.github.io/picasso/)
 - [Retrofit 2](https://square.github.io/retrofit/)
