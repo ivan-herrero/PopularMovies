@@ -1,6 +1,6 @@
 # PopularMovies
 
-Android app that allows you to browse movies and their info provided by [The Movie Database](https://www.themoviedb.org/) API. Designed as a learning experience to explore the basics of the Android platform.
+Android app that allows you to browse movies and their info provided by [The Movie Database](https://www.themoviedb.org/) API. Designed as a learning experiment to explore the basics of the Android platform.
 
 ## Features
 
