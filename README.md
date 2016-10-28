@@ -4,7 +4,7 @@ Android app that allows you to browse movies and their info provided by [The Mov
 
 ## Features
 
-- Browse the most popular or the most rated movies.X
+- Browse the most popular or the most rated movies.
 - Watch trailers.
 - Read movies overviews.
 
