@@ -25,10 +25,6 @@ Android app that allows you to browse movies and their info provided by [The Mov
 - [Google-gson](https://github.com/google/gson)
 - [AdjustableImageView](https://github.com/nuuneoi/AdjustableImageView)
 
-## TODO
-- [x] Stage #1
-- [ ] Stage #2
-
 ## Inspired by
 
 **Idea**: Popular Movies Android app from Udacity's [Developing Android Apps](https://www.udacity.com/course/developing-android-apps--ud853) course, part of  Google's Android Developer Nanodegree.
