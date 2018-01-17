@@ -17,7 +17,7 @@ Android app that allows you to browse movies and their info provided by [The Mov
 ## Screens
 ![Popular Movies Main image](demo/PopMov_main1.png)
 ![Popular Movies Main image](https://raw.githubusercontent.com/doyouevendev/PopularMovies/master/demo/PopMov_detail1.png)
-[[https://github.com/username/repository/blob/master/img/octocat.png|alt=octocat]]
+[[https://raw.githubusercontent.com/doyouevendev/PopularMovies/master/demo/PopMov_detail1.png]]
 
 
 ![Popular Movies Detail image](demo/PopMov_detail1.png)
